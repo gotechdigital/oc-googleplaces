@@ -1,0 +1,6 @@
+plugin:
+    name: 'gotech.googleplaces::lang.plugin.name'
+    description: 'gotech.googleplaces::lang.plugin.description'
+    author: GoTech
+    icon: oc-icon-map-marker
+    homepage: 'https://gotech.ar'

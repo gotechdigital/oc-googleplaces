@@ -1,0 +1,8 @@
+{
+    "name": "gotech/googleplaces-plugin",
+    "type": "october-plugin",
+    "description": "Google places autocomplete field for frontend",
+    "require": {
+        "composer/installers": "~1.0"
+    }
+}
