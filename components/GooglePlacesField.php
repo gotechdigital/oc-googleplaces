@@ -17,23 +17,29 @@ class GooglePlacesField extends ComponentBase
 
     public function onRun(){
         $key = $this->property('api_key');
-        $field = $this->property('field', 'address-autocomplete');
+        $fields = $this->property('fields');
 
         $scripts = "";
-        $scripts .= "<script>
-            
-            let autocomplete;
 
-            function initAutocomplete() {
-                autocomplete = new google.maps.places.Autocomplete(
-                    document.getElementById('{$field}'), {
-                    //types: ['establishment'],
-                    componentRestrictions: { 'country': ['us'] },
+        $scripts .= "<script>";
+        
+        foreach($fields as $field) {
+            $scripts .= "let {$field};";
+        }
+
+        $scripts .= "function initAutocomplete() {";
+        
+        foreach ($fields as $field) {
+            $scripts .= "
+                {$field} = new google.maps.places.Autocomplete(
+                    document.getElementById('{$field}'), {componentRestrictions: { 'country': ['us'] },
                     fields: ['place_id', 'geometry', 'name']
                 });
-            }
-            </script>";
-
+            ";
+        }
+        
+        $scripts .="}";
+        $scripts .= "</script>";
 
         $scripts .= "<script async src='https://maps.googleapis.com/maps/api/js?key={$key}&libraries=places&callback=initAutocomplete'></script>";
 
